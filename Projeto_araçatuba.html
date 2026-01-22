@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt - BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TAGS</title>
+    <style>
+            body {
+            background-color: #001938;
+            font: normal 15pt Arial;
+            font-weight: bold;
+            }
+
+            .consulta {
+                color: #ffffff; /* cor para "Consulta de" */
+            }
+        /* container principal */
+            .container {
+            display: flex;
+            align-items: center;        /* centraliza verticalmente */
+            justify-content: space-between;
+            padding: 40px;
+            
+            }
+
+        /* conteúdo do lado esquerdo */
+            .conteudo {
+            text-align: center;         /* centraliza o texto */
+            font-family: Arial, sans-serif;
+            width: 100%;
+            color:#FC5C00;
+            }
+
+       
+            #tagInput {
+            text-transform: uppercase;
+            max-width: 200px;
+            letter-spacing: 2px;
+            font-weight: bold;
+            }
+            
+            .conteudo input {
+            width: 100%;
+            max-width: 400px;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 14px;
+            outline: none;
+            }
+
+            
+            
+            .conteudo input:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.4);
+            }
+
+            .conteudo input[readonly] {
+            background-color: #f2f2f2;
+            cursor: not-allowed;
+            }
+    
+    @media (max-width: 768px) {
+
+    body {
+        font-size: 13pt;
+    }
+
+    .container {
+        flex-direction: column; /* empilha os elementos */
+        padding: 20px;
+    }
+
+    .conteudo {
+        width: 100%;
+    }
+
+    h1 {
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+
+    .conteudo input {
+        width: 100%;
+        max-width: 100%;
+        font-size: 16px;
+        padding: 12px;
+        box-sizing: border-box;
+    }
+
+    #tagInput {
+        max-width: 100%;
+        text-align: center;
+    }
+
+}
+
+   
+   </style>
+
+
+</head>
+<body>
+    <div class="container">
+        <div class="conteudo">
+            <h1>
+                 <span class="consulta">Consulta de tags</span>
+            </h1>
+                
+            Informe a tag:
+            <input type="text" id="tagInput" placeholder="Ex: A,V,MA">
+
+            <br><br>
+
+            <label>Ponto de Acesso:</label><br>
+            <input type="text" id="ponto" readonly>
+
+            <br><br>
+
+            <label>Cidade:</label><br>
+            <input type="text" id="cidade" readonly>
+        </div>
+
+   
+    </div>
+
+    
+    <script>
+          const dados = {
+        "A": { ponto: "OLT - MARILIA - MARACA - 01", cidade: "Marília - Maracá" },
+        "E": { ponto: "OLT - MARILIA - MARACA - 01", cidade: "Marília - Maracá" },
+        "WE": { ponto: "OLT - MARILIA - MARACA - 01", cidade: "Marília - Maracá" },
+        "WA": { ponto: "OLT - MARILIA - MARACA - 01", cidade: "Marília - Maracá" },
+        "V": { ponto: "OLT - RANCHARIA - 01", cidade: "Rancharia" },
+        "MA": { ponto: "OLT - MARACAI - 01", cidade: "Maracaí" },
+        "PP": { ponto: "OLT - PARAGUAÇU PAULISTA - 01", cidade: "Paraguaçu Paulista" },
+        "S": { ponto: "OLT - PEDRINHAS PAULISTA - 01", cidade: "Pedrinhas Paulista" },
+        "CR": { ponto: "OLT - CRUZALIA - 01", cidade: "Cruzália" },
+        "SC": { ponto: "OLT - SANTA CRUZ DA BOA VISTA - 01", cidade: "Santa Cruz da Boa Vista" },
+        "U": { ponto: "OLT - ROSETA - 01", cidade: "Roseta" },
+        "QT": { ponto: "OLT - QUATA - 01", cidade: "Quatá" },
+        "T": { ponto: "OLT - TARUMA - 01", cidade: "Tarumã" },
+        "R": { ponto: "OLT - JOAO RAMALHO - 01", cidade: "João Ramalho" },
+        "X": { ponto: "OLT - POMPEIA - 01", cidade: "Pompéia" },
+        "WX": { ponto: "OLT - POMPEIA - 01", cidade: "Pompéia" },
+        "O": { ponto: "OLT - QUINTANA - 01", cidade: "Quintana" },
+        "L": { ponto: "OLT - MARILIA CAVALLARI - 01", cidade: "Marilia - Cavalari" },
+        "WL": { ponto: "OLT - MARILIA CAVALLARI - 01", cidade: "Marilia - Cavalari" },
+        "P": { ponto: "OLT - GUAIMBE - 01", cidade: "Guaimbê" },
+        "M": { ponto: "OLT - MARILIA - CENTRO - 02", cidade: "Marília - Centro 2" },
+        "N": { ponto: "OLT - MARILIA - CENTRO - 01", cidade: "Marília - Centro 1" },
+        "D": { ponto: "OLT - MARILIA - NOVA MARILIA - 01", cidade: "Marília - Nova Marilia" },
+        "WD": { ponto: "OLT - MARILIA - NOVA MARILIA - 01", cidade: "Marília - Nova Marilia" },
+        "Q": { ponto: "OLT - GETULINA - 01", cidade: "Getulina" },
+        "LA": { ponto: "OLT - LUTECIA - 01", cidade: "Lutécia" },
+        "K": { ponto: "OLT - ORIENTE - 01", cidade: "Oriente" },
+        "I": { ponto: "OLT - OSCAR BRESSANE - 01", cidade: "Oscar Bressane" },
+        "G": { ponto: "OLT - GARÇA - 01", cidade: "Garça" },
+        "J": { ponto: "OLT - JULIO MESQUITA - 01", cidade: "Júlio Mesquita" },
+        "H": { ponto: "OLT - VERA CRUZ - 01", cidade: "Vera Cruz" },
+        "C": { ponto: "OLT - MARILIA CALIFORNIA - 01", cidade: "Marilia California" },
+        "WC": { ponto: "OLT - MARILIA CALIFORNIA - 01", cidade: "Marilia California" },
+        "B": { ponto: "OLT - MARILIA MACUL - 01", cidade: "Marilia Macul" },
+        "WB": { ponto: "OLT - MARILIA MACUL - 01", cidade: "Marilia Macul" },
+        "AV": { ponto: "OLT - AVENCAS - 01", cidade: "Avencas" },
+        "F": { ponto: "OLT - ECHAPORA - 01", cidade: "Echaporã" },
+        "Y": { ponto: "OLT - Florinea - 01", cidade: "Florinia" },
+        "PL": { ponto: "OLT -Platina - 01", cidade: "Platina" },
+        "RU": { ponto: "OLT - ARACATUBA - UMUARAMA - 01", cidade: "Araçatuba - Umuarama" },
+        "RE": { ponto: "OLT - ARACATUBA - ESPLANADA - 01", cidade: "Araçatuba - Esplanada" },
+        "RP": { ponto: "OLT - ARACATUBA - PLANALTO - 01", cidade: "Araçatuba - Planalto" },
+        "RI": { ponto: "OLT - ARACATUBA - IPANEMA - 01", cidade: "Araçatuba - Ipanema" },
+        "RC": { ponto: "OLT - ARACATUBA - CENTRO - 01", cidade: "Araçatuba - Centro" }
+    };
+
+    const tagInput = document.getElementById("tagInput");
+    const ponto = document.getElementById("ponto");
+    const cidade = document.getElementById("cidade");
+
+    tagInput.addEventListener("input", () => {
+        const tag = tagInput.value.toUpperCase();
+
+        if (dados[tag]) {
+        ponto.value = dados[tag].ponto;
+        cidade.value = dados[tag].cidade;
+        } else {
+        ponto.value = "";
+        cidade.value = "";
+        }
+    });
+        
+    
+
+    </script>
+
+</body>
+</html>
